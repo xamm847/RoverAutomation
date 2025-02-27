@@ -1,0 +1,25 @@
+[
+{
+        "username": "xamm",
+        "password": "Mnbv@12345",
+        "expected": "RoverMd"
+},
+
+{
+    "username": "xamm3",
+    "password": "Mnbv@12345",
+    "expected": "Bad Credentials : Invalid username or password"
+},
+{
+    "username": "xamm2",
+    "password": "Asdf@1122335",
+    "expected": "Bad Credentials : Invalid username or password"
+},
+{
+    "username": "xam",
+    "password": "Asdf@1122336",
+    "expected": "Bad Credentials : Invalid username or password"
+}
+
+
+]
