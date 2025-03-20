@@ -12,10 +12,10 @@ describe('Patient Registration', () => {
                 cy.get(':nth-child(3) > .p-inputtext').type(userdata.password);
                 cy.get("button[type='submit']").click();
 
-                if (userdata.username === 'xamm' && userdata.password === "Mnbv@12345") {
+                if (userdata.username === 'awaisQA1' && userdata.password === "Foxtrot@12345") {
                     cy.get("img[class='ng-tns-c60-0']").should('exist');
                     cy.get("div[aria-label='dropdown trigger']").click();
-                    cy.get(".p-dropdown-filter.p-inputtext.p-component").type('Lakewood');
+                    cy.get(".p-dropdown-filter.p-inputtext.p-component").type('Pearland');
                     cy.get("div[class='icd-item ng-star-inserted'] div strong").click();
                     cy.get('.p-button-label').click();
 

@@ -10,8 +10,8 @@ describe('POM', ()=>{
        cy.visit("https://qa.rovermd.com:8443/RoverApp/#/rovermd/dashboard")
 
        const ln=new login();
-       ln.setUserName("xamm")
-       ln.setPassword("Zxcv@0987")
+       ln.setUserName("awaisQA1")
+       ln.setPassword("Foxtrot@12345")
        ln.ClickSubmit();
        ln.verifyLogin();
     })
