@@ -9,11 +9,13 @@
   "author": "Awais",
   "license": "ISC",
   "dependencies": {
-    "@applitools/eyes-cypress": "^3.44.8"
+    "@applitools/eyes-cypress": "^3.52.0",
+    "ajv": "^8.17.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "chai": "^5.1.1",
-    "cypress": "^14.2.0",
+    "cypress": "^14.4.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-xpath": "^2.0.1"
   }

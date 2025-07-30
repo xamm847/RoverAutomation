@@ -13,17 +13,20 @@ describe('Patient Registration', () => {
                 cy.get("button[type='submit']").click();
 
                 if (userdata.username === 'awaisQA1' && userdata.password === "Foxtrot@12345") {
-                    cy.get("img[class='ng-tns-c60-0']").should('exist');
+                    cy.get('.p-dropdown-trigger-icon', { timeout: 10000 }).should('be.visible');
                     cy.get("div[aria-label='dropdown trigger']").click();
                     cy.get(".p-dropdown-filter.p-inputtext.p-component").type('Pearland');
                     cy.get("div[class='icd-item ng-star-inserted'] div strong").click();
                     cy.get('.p-button-label').click();
-
+                    cy.wait(5000);
+                    cy.get('.my-2').should('contain.text', 'A newer version of application is available.');
+                    
+                    cy.get('.button-margin > .p-ripple').should('contain.text', 'Reload Later').click();
                     cy.get('.p-menubar-root-list > :nth-child(1) > [target="undefined"] > .p-submenu-icon').click();
                     cy.get('body > app-root:nth-child(1) > app-main:nth-child(2) > div:nth-child(1) > app-topbar:nth-child(1) > div:nth-child(2) > div:nth-child(1) > p-menubar:nth-child(2) > div:nth-child(1) > p-menubarsub:nth-child(3) > ul:nth-child(1) > li:nth-child(1) > p-menubarsub:nth-child(2) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1) > span:nth-child(1)').click();
-                    cy.wait(2000);
+                    cy.wait(3000);
                     
-                    cy.get('.flex > p').should('be.visible').and('have.text', 'New Patient Registration');
+                    cy.get('.mb-5 > .flex > p').should('be.visible').and('have.text', 'New Patient Registration');
                     cy.wait(5000);
                     cy.get(':nth-child(2) > [style="width: 10%;"] > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger').click();
                     cy.get('#pr_id_13_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
@@ -40,13 +43,13 @@ describe('Patient Registration', () => {
                         }
                     };
 
-                    validateNameField('#patientFirstName', 'Awais'); // First Name
+                    validateNameField('#patientFirstName', 'Awaiss'); // First Name
                     validateNameField('#patientMiddleName', 'new'); // Middle Name (if applicable, adjust selector accordingly)
-                    validateNameField('#patientLastName', 'Automation Twenty five'); // Last Name
+                    validateNameField('#patientLastName', 'Automation Thirty two'); // Last Name
                     cy.get('.mt-3.mb-3 > [style="width: 10%;"] > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click(); // Marital Status
                     cy.get('#pr_id_14_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
                     cy.get('.customCalendarIconStyleInvalid > .p-element > .p-button-icon').click();
-                    cy.get('tbody.ng-tns-c51-19 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
+                    cy.get('tbody.ng-tns-c53-20 > :nth-child(1) > :nth-child(3) > .p-ripple').click();
                     cy.wait(3000);
 
                                 
@@ -96,7 +99,7 @@ describe('Patient Registration', () => {
                                             // Continue filling out the form
                                             cy.get('#patientSSN').type("453-45-3453"); //SSN
                                             cy.get('.mt-3.mb-3 > .custom-field.ng-star-inserted > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click(); //Attending physician
-                                            cy.get('#pr_id_35_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
+                                            cy.get('#pr_id_40_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
                                             cy.get('.my_scroll_div > :nth-child(1) > :nth-child(1) > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click()//Race
                                             cy.get('#pr_id_15_list > :nth-child(2) > .p-ripple > .ng-star-inserted').click();
                                             cy.get('[style="width: 14%;"] > .p-inputwrapper > .p-multiselect > .p-multiselect-trigger > .p-multiselect-trigger-icon').click();//Ethnicity
@@ -113,7 +116,7 @@ describe('Patient Registration', () => {
                                             cy.get('.my_scroll_div > :nth-child(1) > :nth-child(5) > .p-inputwrapper > .p-dropdown > .p-dropdown-label').should('have.text','Male');
                                             cy.get('.mt-2 > :nth-child(1) > .custom-form-label').should('have.text','Reason For Visit');
                                             cy.get('.mt-2 > :nth-child(1) > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click(); //Reason of visit
-                                            cy.get('#pr_id_36_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
+                                            cy.get('#pr_id_41_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
                                             cy.get('#patientVisitReasonSpecify').should('have.value','BBH'); //Specify REason For visit
                                             cy.get('.mt-2 > [style="width: 10%;"] > .custom-form-label').should('have.text','Contact No');
                                             cy.get('#patientContactNumber').type('(423) 423-4234').should('have.value','(423) 423-4234');
@@ -203,15 +206,15 @@ describe('Patient Registration', () => {
                                             cy.wait(3000);
 
                     
-                                            cy.get('#p-tabpanel-3-label > .p-tabview-title').should('contain.text','Physician').click();
+                                            cy.get('#p-tabpanel-4-label > .p-tabview-title').should('contain.text','Physician').click();
                                             cy.get('.flex > .heading-styling').should('contain.text','Primary Care Physician');
-                                            cy.get('#p-tabpanel-3 > .my_scroll_div > :nth-child(2) > :nth-child(1) > .custom-form-label').should('contain.text','Primary Care Physician');
+                                            cy.get('#p-tabpanel-4 > .my_scroll_div > :nth-child(2) > :nth-child(1) > .custom-form-label').should('contain.text','Primary Care Physician');
                                             cy.get('#patientPCP').type('Adam Parker').should('have.value','Adam Parker');
-                                            cy.get('#p-tabpanel-3 > .my_scroll_div > :nth-child(2) > :nth-child(2) > .custom-form-label').should('contain.text','City');
+                                            cy.get('#p-tabpanel-4 > .my_scroll_div > :nth-child(2) > :nth-child(2) > .custom-form-label').should('contain.text','City');
                                             cy.get('#patientPCPCity').type('texas').should('have.value','texas');
-                                            cy.get("label[for='patientPCPState']").should('contain.text','State');
+                                            cy.get('#p-tabpanel-4 > .my_scroll_div > :nth-child(2) > :nth-child(3) > .custom-form-label').should('contain.text','State');
                                             cy.get(':nth-child(2) > :nth-child(3) > #patientPCPState').type('Dallas').should('have.value','Dallas');
-                                            cy.get("label[for='patientPCPZip']").should('contain.text','Zip Code');
+                                            cy.get('#p-tabpanel-4 > .my_scroll_div > :nth-child(2) > :nth-child(4) > .custom-form-label').should('contain.text','Zip Code');
                                             cy.get(".p-inputtext.p-component.p-element.p-inputtext-sm.ng-dirty.mr-3.ng-untouched.ng-pristine.ng-valid[formcontrolname='patientPCPZip']").type('435335').should('have.value','435335');
                                             cy.get('.mb-4 > :nth-child(1) > .custom-form-label').should('contain.text',"Primary Care Physician's Address");
                                             cy.get('#patientPCPAddress').type('22365 Mountain Pine Dr, New Caney, TX 77357, USA').should('have.value','22365 Mountain Pine Dr, New Caney, TX 77357, USA');
@@ -220,13 +223,13 @@ describe('Patient Registration', () => {
 
                                             //Physician Page
                                             cy.get('.mt-2 > .heading-styling').should('contain.text','Speciality Care Physician');
-                                            cy.get('.mt-4 > :nth-child(1) > .custom-form-label').should('contain.text','Speciality Care Physician');
+                                            cy.get('.my_scroll_div > .mt-4 > :nth-child(1) > .custom-form-label').should('contain.text','Speciality Care Physician');
                                             cy.get('#patientSCP').type('Marina bate').should('have.value','Marina bate');
-                                            cy.get("label[for='patientSCPCity']").should('contain.text','City');
+                                            cy.get('.mt-4 > :nth-child(2) > .custom-form-label').should('contain.text','City');
                                             cy.get('#patientSCPCity').type('texas').should('have.value','texas');
-                                            cy.get("label[for='patientSCPState']").should('contain.text','State');
+                                            cy.get('.mt-4 > :nth-child(3) > .custom-form-label').should('contain.text','State');
                                             cy.get('.mt-4 > :nth-child(3) > #patientPCPState').type('Dallas').should('have.value','Dallas');
-                                            cy.get("label[for='patientSCPZip']").should('contain.text','Zip Code');
+                                            cy.get('.mt-4 > :nth-child(4) > .custom-form-label').should('contain.text','Zip Code');
                                             cy.get('.mt-4 > :nth-child(4) > .p-inputtext').type('435335').should('have.value','435335');
                                             cy.get('.my_scroll_div > :nth-child(6) > :nth-child(1) > .custom-form-label').should('contain.text',"Speciality Care Physician's Address");
                                             cy.get('#patientSCPAddress').type('22365 Mountain Pine Dr, New Caney, TX 77357, USA').should('have.value','22365 Mountain Pine Dr, New Caney, TX 77357, USA');
@@ -234,68 +237,63 @@ describe('Patient Registration', () => {
                                             cy.get('#patientSCPAddress2').type('22365 Mountain Pine Dr, New Caney, TX 77357, USA').should('have.value','22365 Mountain Pine Dr, New Caney, TX 77357, USA');
 
                                             //Covid-19 Page
-                                            cy.get('#p-tabpanel-4-label > .p-tabview-title').should('contain.text','COVID-19').click();
+                                            cy.get('#p-tabpanel-5-label').should('contain.text','COVID-19').click();
                                             cy.get('.mt-2 > :nth-child(1) > p').should('contain.text','Do you have any symptoms?');
                                             
                                     
 
 
                                             // Click the 'Yes' radio button
-                                            cy.get("p-radiobutton[inputid='patientCovidSymptomsCheckyes'] span[class='p-radiobutton-icon']") // Update selector to target 'Yes'
+                                            cy.get('.mt-2 > :nth-child(1) > .formgroup-inline > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box') // Update selector to target 'Yes'
                                             .click({ force: true })
                                             .then(() => {
                                                 // Wait for the page to update
                                                 cy.wait(1000); 
 
                                                 // Verify if 'Yes' is checked
-                                                cy.get("p-radiobutton[inputid='patientCovidSymptomsCheckyes'] span[class='p-radiobutton-icon']") // Check the 'Yes' button icon
-                                                .should('have.class', 'p-radiobutton-icon')
+                                                cy.get('.mt-2 > :nth-child(1) > .formgroup-inline > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box') // Check the 'Yes' button icon
+                                                .should('have.class', 'p-radiobutton-box p-highlight') // Check that it has the 'checked' class
                                                 .then(($yesChecked) => {
                                                     if ($yesChecked.length > 0) {
                                                     // Yes is checked - verify that additional fields are visible
-                                                    cy.get("label[for='patientCovidSymptomsOnsetDate']").should('be.visible');
-                                                    cy.get("div[class='ng-star-inserted'] p[class='mt-3']").should('be.visible');
+                                                    cy.get('div.ng-star-inserted > :nth-child(1) > .custom-form-label').should('be.visible');
+                                                    cy.get('.mt-3 > .custom-form-label').should('be.visible');
                                                     console.log('Yes is selected: Additional fields are visible.');
                                                     } else {
                                                     // If not, click the 'No' radio button and verify fields are hidden
-                                                    cy.get('.mt-2 > :nth-child(1) > .formgroup-inline > :nth-child(2) > .p-element > .p-radiobutton > .p-radiobutton-box')
+                                                    cy.get('div.mt-2 > :nth-child(1) > .formgroup-inline > :nth-child(2) > .p-element > .p-radiobutton > .p-radiobutton-box > .p-radiobutton-icon')
                                                         .click({ force: true });
                                                     cy.wait(1000); // Wait to allow for page re-renders
-                                                    cy.get("label[for='patientCovidSymptomsOnsetDate']").should('not.be.visible');
-                                                    cy.get("div[class='ng-star-inserted'] p[class='mt-3']").should('not.be.visible');
+                                                    cy.get('div.ng-star-inserted > :nth-child(1) > .custom-form-label').should('not.be.visible');
+                                                    cy.get('.mt-3 > .custom-form-label').should('not.be.visible');
                                                     console.log('No is selected: Additional fields are hidden.');
                                                     }
                                                 });
                                             });
-                                            cy.get('div.ng-star-inserted > :nth-child(1) > .custom-form-label').should('contain.text','Date of symptoms onset?');
-                                            cy.get('.customCalendarIconStyleInvalid > .p-element > .p-button-icon').click();
-                                            cy.get('tbody.ng-tns-c51-56 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
-                                            cy.get('div.ng-star-inserted > .mt-3').should('contain.text','Check all symptoms that you have: Please select at least one option*');
-                                            cy.get("p-checkbox[inputid='Fever'] div[class='p-checkbox-box']").click();
                                             cy.get("label[for='Fever']").should('contain.text','Fever');
                                             cy.get("p-checkbox[inputid='Body Aches'] div[class='p-checkbox-box']").click();
-                                            cy.get("label[for='Body Aches']").should('contain.text','Muscle/Body Aches');
+                                            cy.get(':nth-child(5) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('contain.text','Muscle/Body Aches');
                                             cy.get("p-checkbox[inputid='patientCovidsymptomsRunnyNoseCongestion'] div[class='p-checkbox-box']").click();
-                                            cy.get("label[for='patientCovidsymptomsRunnyNoseCongestion']").should('contain.text','Congestion');
+                                            cy.get(':nth-child(6) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('contain.text','Congestion');
                                             cy.get("p-checkbox[inputid='patientCovidsymptomsOthers'] div[class='p-checkbox-box']").click();
-                                            cy.get("label[for='patientCovidsymptomsOthers']").should('contain.text','Others');
-                                            cy.get("label[for='patientCovidsymptomsOthersDesc']").should('contain.text','Briefly Describe Symptoms');
+                                            cy.get('div.ng-star-inserted > :nth-child(8) > :nth-child(3) > .p-element > .p-checkbox > .p-checkbox-box').should('contain.text','Others');
+                                            cy.get(':nth-child(8) > .custom-field > .custom-form-label').should('contain.text','Briefly Describe Symptoms');
                                             cy.get('.custom-field > #float-input').type('tester reasons');
                                             cy.get(':nth-child(2) > .mb-3').should('contain.text','Are you employed in healthcare with direct patient contact?');
                                             cy.get('.mt-2 > :nth-child(2) > .formgroup-inline > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box').click();
                                             cy.get('.mt-2 > :nth-child(3) > p').should('contain.text','Have you tested positive for COVID before, if so what date?');
                                             cy.get(':nth-child(3) > .formgroup-inline > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box').click();
                                             cy.get(':nth-child(4) > .p-inputwrapper > .p-calendar > .p-element > .p-button-icon').click();
-                                            cy.get('tbody.ng-tns-c51-57 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
+                                            cy.get('tbody.ng-tns-c53-59 > :nth-child(1) > :nth-child(5) > .p-ripple').click();
                                             cy.get('.pl-2 > .mt-3').should('contain.text','Have you been exposed or had direct contact with someone with CORONAVIRUS?');
                                             cy.get(':nth-child(6) > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box').click();
                                             cy.get(':nth-child(7) > .p-inputwrapper > .p-calendar > .p-element > .p-button-icon').click();
-                                            cy.get('tbody.ng-tns-c51-58 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
+                                            cy.get('tbody.ng-tns-c53-60 > :nth-child(1) > :nth-child(5) > .p-ripple').click();
                                             cy.get(':nth-child(7) > .custom-form-label').should('contain.text','Exposure Date');
                                             cy.get('.mt-2 > :nth-child(8)').should('contain.text','Have you traveled outside of the country within the last two weeks?');
                                             cy.get(':nth-child(9) > :nth-child(1) > .p-element > .p-radiobutton > .p-radiobutton-box').click();
-                                            cy.get('.customCalendarIconStyleInvalid > .p-element > .p-button-icon').click();
-                                            cy.get('.p-datepicker-today > .p-ripple').click();
+                                            cy.get('[style="width: 40%;"] > .p-inputwrapper > .p-calendar > .p-element > .p-button-icon').click();
+                                            cy.get('tbody.ng-tns-c53-61 > :nth-child(1) > :nth-child(5) > .p-ripple').click();
                                             cy.get('#patientOutsideTravelLocation').type('texas').should('have.value','texas');
                                             cy.get('#patientOutsideTravelDuration').type('2 years').should('have.value','2 years');
                                             cy.get('#p-tabpanel-5-label > .p-tabview-title').should('contain.text','Guarantor').click();
@@ -306,11 +304,11 @@ describe('Patient Registration', () => {
                                             cy.get(':nth-child(2) > .p-inputwrapper > .p-dropdown > .p-dropdown-trigger > .p-dropdown-trigger-icon').click();
                                             cy.get('#pr_id_21_list > :nth-child(1) > .p-ripple > .ng-star-inserted').click();
                                             cy.get('[style="font-size: 13px;"] > :nth-child(2) > :nth-child(1) > .custom-form-label').should('contain.text','First Name');
-                                            cy.get('#patientGurantorFirstName').should('have.value','Awais');
+                                            cy.get('#patientGurantorFirstName').should('have.value','Awaiss');
                                             cy.get('[style="font-size: 13px;"] > :nth-child(2) > :nth-child(2) > .custom-form-label').should('contain.text','Last Name');
-                                            cy.get('#patientGurantorLastName').should('have.value','Automation Twenty five');
+                                            cy.get('#patientGurantorLastName').should('have.value','Automation Thirty two');
                                             cy.get('[style="font-size: 13px;"] > :nth-child(2) > :nth-child(3) > .custom-form-label').should('contain.text','DOB')
-                                            cy.get('#patientGurantorDob').should('have.value','11/01/2024');
+                                            cy.get('#patientGurantorDob').should('have.value','06/05/2025');
                                             cy.get('[style="font-size: 13px;"] > :nth-child(2) > :nth-child(4) > .custom-form-label').should('contain.text','Phone No');
                                             cy.get('#patientGurantorPhone').should('have.value','(423) 423-4234');
                                             cy.get('[style="font-size: 13px;"] > :nth-child(2) > :nth-child(5) > .custom-form-label').should('contain.text','SSN');
@@ -344,7 +342,7 @@ describe('Patient Registration', () => {
                                             cy.get('.p-autocomplete-input').type('others');
                                             cy.wait(2000);
                                             // Scroll and select the "Others" option from the list
-                                            cy.get(':nth-child(11) > .ng-tns-c48-22') // Replace with the actual selector for the dropdown options container
+                                            cy.get(':nth-child(5) > .ng-tns-c50-22') // Replace with the actual selector for the dropdown options container
                                             .contains('Others')
                                             .scrollIntoView()
                                             .should('be.visible')
@@ -361,9 +359,9 @@ describe('Patient Registration', () => {
                                             // cy.get('#pr_id_26_label').should('have.value','Self');
                                             
                                              // Verify that the autofetched fields contain the expected values
-                                             cy.get('#firstname').should('have.value', 'Awais'); // Replace with actual selector and value
-                                             cy.get('#lastname').should('have.value', 'Automation Twenty five'); // Replace with actual selector and value
-                                             cy.get('#subscriberDob').should('have.value', '11/01/2024'); // Replace with actual selector and value
+                                             cy.get('#firstname').should('have.value', 'Awaiss'); // Replace with actual selector and value
+                                             cy.get('#lastname').should('have.value', 'Automation Thirty two'); // Replace with actual selector and value
+                                             cy.get('#subscriberDob').should('have.value', '06/05/2025'); // Replace with actual selector and value
                                             //  cy.get('#pr_id_27_label').should('have.value', 'Male');
                                              cy.get('#address').should('have.value', '22365 Mountain Pine Dr'); // Replace with actual selector and value
                                              cy.get('#city').should('have.value', 'New Caney'); // Replace with actual selector and value
@@ -387,10 +385,10 @@ describe('Patient Registration', () => {
                                              cy.get('#subscriberEmpPhone').should('have.value','(523) 452-3452');
                                              cy.get('.p-dialog-content > :nth-child(10) > :nth-child(3) > .custom-form-label').should('contain.text','Effective Date');
                                              cy.get(':nth-child(10) > :nth-child(3) > .p-inputwrapper > .customCalendarIconStyleValid > .p-element > .p-button-icon').click();
-                                             cy.get('tbody.ng-tns-c51-24 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
+                                             cy.get('tbody.ng-tns-c53-24 > :nth-child(1) > :nth-child(5) > .p-ripple').click();
                                              cy.get(':nth-child(10) > :nth-child(4) > .custom-form-label').should('contain.text','Termination Date');
                                              cy.get(':nth-child(10) > :nth-child(4) > .p-inputwrapper > .customCalendarIconStyleValid > .p-element > .p-button-icon').click();
-                                             cy.get('tbody.ng-tns-c51-25 > :nth-child(1) > :nth-child(7) > .p-ripple').click();
+                                             cy.get('tbody.ng-tns-c53-25 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
                                              cy.get('.justify-content-between > :nth-child(1) > .ml-2').should('contain.text','Active Insurance');
                                              cy.get('[label="Save"] > .p-ripple > .p-button-label').click();
                                              cy.get('#p-tabpanel-7-label > .p-tabview-title').should('contain.text','Emergency Contact').click();
@@ -417,24 +415,61 @@ describe('Patient Registration', () => {
                                              cy.get('#patientEmergencyCountry').type('USA').should('have.value','USA');
                                             
                                              cy.get('#p-tabpanel-8-label > .p-tabview-title').should('contain.text','Marketing').click();
-                                             cy.get('.mt-4 > :nth-child(1) > .mt-2 > span').should('contain.text','How did you hear about us?');
-                                             cy.get('.col-4 > .p-inputwrapper > .p-multiselect > .p-multiselect-trigger > .p-multiselect-trigger-icon').click();
-                                             cy.get(':nth-child(1) > .p-ripple > .p-checkbox > .p-checkbox-box').click();
-                                             cy.get(':nth-child(9) > .p-ripple > .p-checkbox > .p-checkbox-box').scrollIntoView().click();
-                                             cy.get('[styleclass="p-button-sm p-button-raised"] > .p-ripple > .p-button-label').click();
-                                             // Verify the text in the dialog
-                                            cy.get('.font-bold').should('contain.text', 'Do you want to take signature now?');
+                                             cy.get(':nth-child(2) > .col-9 > .field-radiobutton > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                                cy.get(':nth-child(2) > .col-9 > .field-radiobutton > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                             
+                                             cy.get('[inputid="Google Search"] > .p-radiobutton-label').should('contain.text','Google Search');
+                                             cy.get('[inputid="Website"] > .p-radiobutton-label').should('contain.text','Website');
+                                             cy.get('[inputid="Online Review"] > .p-radiobutton-label').should('contain.text','Online Review');
+                                             cy.get('[inputid="Map Search"] > .p-radiobutton-label').should('contain.text','Map Search');
+                                             cy.get('[inputid="Google Search"] > .p-radiobutton > .p-radiobutton-box').click().should('have.class', 'p-radiobutton-box p-highlight');
+                                            cy.get(':nth-child(3) > .col-9 > .field-radiobutton > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(3) > .col-9 > .field-radiobutton > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get('[inputid="Facebook"] > .p-radiobutton-label').should('contain.text','Facebook');
+                                            cy.get('[inputid="Instagram"] > .p-radiobutton-label').should('contain.text','Instagram');
+                                            cy.get('[inputid="TikTok"] > .p-radiobutton-label').should('contain.text','TikTok');
+                                            cy.get('[inputid="Facebook"] > .p-radiobutton > .p-radiobutton-box').click().should('have.class', 'p-radiobutton-box p-highlight');
+                                            cy.get('.col-9 > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get('.col-9 > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get('[inputid="fireEmsLawEnforcement"] > .p-radiobutton-label').should('contain.text','Fire / EMS / Law Enforcement');
+                                            cy.get('[inputid="School Employee"] > .p-radiobutton-label').should('contain.text','School Employee');
+                                            // cy.get('[inputid="collegeStudent"] > .p-radiobutton-label').should('contain.text','City Employee ');
+                                            cy.get('[inputid="fireEmsLawEnforcement"] > .p-radiobutton > .p-radiobutton-box').click().should('have.class', 'p-radiobutton-box p-highlight');
+                                            cy.get(':nth-child(5) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(5) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(5) > .col-6 > :nth-child(2) > #float-input').type('Advanced Urgent Care').should('have.value','Advanced Urgent Care');
+                                            cy.get(':nth-child(6) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(6) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(6) > .col-6 > :nth-child(2) > #float-input').type('Technical Physician').should('have.value','Technical Physician');
+                                            cy.get(':nth-child(7) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(7) > .col-6 > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(7) > .col-6 > :nth-child(2) > #float-input').type('CMD').should('have.value','CMD');
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');  
+                                            cy.get(':nth-child(8) > :nth-child(1) > .p-element > .p-checkbox-label').should('contain.text','Community/Marketing Event');
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(2) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(2) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(8) > :nth-child(2) > .p-element > .p-checkbox-label').should('contain.text','Family/Friend');
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(3) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(1) > :nth-child(8) > :nth-child(3) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(3) > .p-element > .p-checkbox-label').should('contain.text','Billboard');
+                                            cy.get(':nth-child(9) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(9) > :nth-child(1) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(9) > :nth-child(1) > .p-element > .p-checkbox-label').should('contain.text','Drive By/Building Sign');
+                                            cy.get(':nth-child(9) > :nth-child(2) > .p-element > .p-checkbox > .p-checkbox-box').click();
+                                            cy.get(':nth-child(9) > :nth-child(2) > .p-element > .p-checkbox > .p-checkbox-box').should('have.class', 'p-checkbox-box p-highlight');
+                                            cy.get(':nth-child(9) > :nth-child(2) > .p-element > .p-checkbox-label').should('contain.text','Brochure');
+                                            cy.get('[styleclass="p-button-sm p-button-raised"] > .p-ripple > .p-button-label').click();
+                                            cy.get('.p-toast-detail').should('have.text', 'Patient Registration is successfully created');
 
-                                            // Click on the confirm button in the dialog
-                                            cy.get('[styleclass="p-button-sm confirm-button-dialog"] > .p-ripple > .p-button-label').first().click(); // Use .first() to ensure only one element is clicked
-
-                                            // Click on the next button to proceed
-                                            cy.get('.flex > :nth-child(1) > .claimViewCustomButton > .p-ripple').click({force: true});
+                                            // cy.get('[styleclass="p-button-sm p-button-raised"] > .p-ripple > .p-button-label').should('contain.text', 'Do you want to take signature now?');
+                                            cy.get('[styleclass="p-button-sm confirm-button-dialog"] > .p-ripple > .p-button-label').click();
 
                                             // Verify the text in the document signing section
-                                            cy.get('.ng-tns-c55-63.ng-star-inserted > .heading-styling').should('contain.text', 'Sign Document');
-
-                                            // Check that the canvas is visible
+                                            cy.get('.flex > :nth-child(1) > .claimViewCustomButton > .p-ripple > .p-button-label').should('contain.text', 'Add Signature').click();
+                                            // Verify the presence of the canvas element for signature
+                                            cy.get('.ng-tns-c57-65.ng-star-inserted > .heading-styling').should('contain.text', 'Sign Documentl');
+                                            // Check that the canvas is visiblel
                                             cy.get('canvas').should('be.visible');
 
                                             // Simulate drawing a signature on the canvas
