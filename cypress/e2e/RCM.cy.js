@@ -283,6 +283,95 @@ describe('RCM - Revenue Cycle Management', () => {
                     cy.log('✅ Create Claim form completion workflow finished');
                     
                     cy.log('🎉 RCM Complete Workflow Test PASSED - All steps completed successfully');
+
+
+                                        // Check if session timeout popup is showing and handle it (NON-BLOCKING)
+                    cy.get('body').then(($body) => {
+                        // Check if session timeout popup exists and is visible
+                        if ($body.find('p-dialog.ng-tns-c57-7').length > 0 && $body.find('p-dialog.ng-tns-c57-7').is(':visible')) {
+                            
+                            cy.log('🚨 Session timeout popup detected - handling re-authentication');
+                            
+                            // Verify session timeout popup is visible
+                            cy.get('p-dialog.ng-tns-c57-7')
+                                .should('be.visible');
+                            
+                            // Verify session timeout heading text
+                            cy.get('p-dialog.ng-tns-c57-7 > .p-dialog-mask > .ng-trigger > .p-dialog-content > .mx-0 > .heading-styling')
+                                .should('be.visible')
+                                .then(($heading) => {
+                                    cy.log(`📋 Session timeout message: "${$heading.text().trim()}"`);
+                                });
+                            
+                            // Verify password label
+                            cy.get(':nth-child(2) > .field > .custom-form-label')
+                                .should('be.visible')
+                                .then(($label) => {
+                                    cy.log(`🏷️ Password label: "${$label.text().trim()}"`);
+                                });
+                            
+                            // Click on password field and enter password
+                            cy.get('#currenUserPassword')
+                                .should('be.visible')
+                                .should('be.enabled')
+                                .click()
+                                .clear()
+                                .type('Foxtrot@12345')
+                                .should('have.value', 'Foxtrot@12345');
+                            
+                            cy.log('✅ Password entered: Foxtrot@12345');
+                            
+                            // Click Login button
+                            cy.get('[label="Login"] > .p-button-label')
+                                .should('be.visible')
+                                .should('be.enabled')
+                                .click();
+                            
+                            cy.log('✅ Login button clicked');
+                            
+                            // Wait for popup to close after successful login
+                            cy.get('p-dialog.ng-tns-c57-7')
+                                .should('not.be.visible');
+                            
+                            cy.log('🎉 Session timeout popup handled successfully - continuing with test execution');
+                            
+                            // Optional: Add a small wait for UI to stabilize after re-authentication
+                            cy.wait(2000);
+                            
+                        } else {
+                            // IMPORTANT: This else block ensures test continues normally if no popup is found
+                            cy.log('ℹ️ No session timeout popup detected - continuing with normal test execution');
+                            // No additional actions needed - test will proceed to next steps automatically
+                        }
+                    });
+
+                        cy.get('.mr-2 > .p-ripple').click();
+                        cy.log('✅ Create Institutional Claim button clicked');
+                        cy.wait(4000);
+                        cy.get('.justify-content-center > .mr-6').should('be.visible').should('have.text' , 'Institutional Claim');
+                        cy.log('✅ Institutional Claim modal opened successfully');
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(1) > .custom-form-label').should('be.visible').should('have.text', 'Claim No');
+                        cy.get('.p-fluid > :nth-child(1) > #float-input').should('be.visible').should('have.value','New');
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(2) > .custom-form-label').should('be.visible').should('have.text', 'Reference No');
+                        cy.get('.p-fluid > :nth-child(2) > #float-input').type('1234567890');
+                        cy.log('✅ Reference No entered successfully');
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(3) > .custom-form-label').should('be.visible').should('have.text', 'Type of Bill');
+                        cy.get('.p-input-icon-right > #float-input').should('be.visible').should('have.value', '131');
+                        cy.get('.p-input-icon-right > .pi').click();
+                        cy.get('.p-overlaypanel-content > :nth-child(1) > :nth-child(1) > .custom-form-label').should('be.visible').should('have.text', 'Type of Facility');
+                        
+                        cy.get('.mr-0 > .custom-form-label').should('be.visible').should('have.text', 'Type of Care');
+                        
+                        cy.get('.p-overlaypanel-content > :nth-child(2) > .custom-field > .custom-form-label').should('be.visible').should('have.text', 'Frequency');
+                        
+                        cy.get('.p-overlaypanel-content > [style="display: flex; justify-content: right;"] > .button-margin > .p-ripple > .p-button-label').click();
+                        cy.get('[style="width: 11%;"] > .custom-form-label').should('be.visible').should('have.text', 'MRN');
+                        cy.get('[style="width: 11%;"] > #float-input').should('be.visible').should('have.value', '312160');
+
+
+
+
+
                 }
             });
         });
