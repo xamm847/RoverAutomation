@@ -424,6 +424,52 @@ describe('RCM - Revenue Cycle Management', () => {
                         // Verify MRN field has auto-populated value "312160" (from patient selection)
                         cy.get('[style="width: 11%;"] > #float-input')
                             .should('have.value', '312160'); // This value should match the selected patient's MRN
+                        // Verify Account No field label
+                        cy.get('form.ng-valid > .p-fluid > :nth-child(5) > .custom-form-label').should('have.text', 'Account No');
+                        // Verify Account No field has auto-populated value "VN-312160-1" (from patient selection)
+                        cy.get('.p-fluid > :nth-child(5) > #float-input').should('have.value', 'VN-312160-1'); // This value should match the selected patient's Account No
+                        // Verify Patient SSN field label
+                        cy.get(':nth-child(6) > .custom-form-label').should('have.text', 'SSN');
+                        // Verify SSN field has auto-populated value "646-34-9491" (from patient selection)
+                        cy.get('#viewClaimFormClaim_SSN > .p-inputtext').should('have.value', '646-34-9491'); // This value should match the selected patient's SSN
+                        // Verify Patient NAme field label
+                        cy.get(':nth-child(2) > [style="width: calc(28% + 1rem);"] > .custom-form-label').should('have.text', 'Patient');
+                        // Verify Patient Name field has auto-populated value "Sign, Awais"
+                        cy.get(':nth-child(2) > [style="width: calc(28% + 1rem);"] > #float-input').should('have.value', 'Sign, Awais'); // This value should match the selected patient's name
+                        // Verify Date of Service field label
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-valid > :nth-child(2) > :nth-child(2) > .custom-form-label').should('have.text', 'Date of Service');
+                        // Verify Date of Service field has auto-populated value
+                        cy.get('form.ng-valid > :nth-child(2) > :nth-child(2) > .p-inputtext').should('have.value', '05/23/2024 06:24:34'); // This value should match the selected patient's date of service
+                        // Verify Upload date field label
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-valid > :nth-child(2) > :nth-child(3) > .custom-form-label').should('have.text', 'Upload Date');
+                        // Verify Upload Date field value
+                        cy.get(':nth-child(3) > .p-inputwrapper > .customCalendarIconStyleValid > .p-element > .p-button-icon').click();
+                        cy.get('tbody.ng-tns-c53-42 > :nth-child(1) > :nth-child(6) > .p-ripple').click();
+
+                        // Verify address field label
+                        cy.get(':nth-child(3) > [style="width: calc(28% + 1rem);"] > .custom-form-label').should('have.text', 'Address');
+                        // Verify address field has value
+                        cy.get(':nth-child(3) > [style="width: calc(28% + 1rem);"] > #float-input').should('have.value', 'United States, Virginia, Sterling, Shepard Drive, 678 Sterling'); // This value should match the selected patient's address
+                        // Verify Phone field label and value
+
+                        // Verify Phone field label and value
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-valid > :nth-child(3) > :nth-child(2) > .custom-form-label')
+                            .should('have.text', 'Phone');
+                        cy.get('#patientContactNumber')
+                            .should('have.value', '(644) 964-7979');
+                        cy.log('✅ Phone auto-populated: (644) 964-7979');
+
+                        // Verify Email field label and value
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-valid > :nth-child(3) > :nth-child(3) > .custom-form-label')
+                            .should('have.text', 'Email');
+                        cy.get(':nth-child(3) > :nth-child(3) > #float-input')
+                            .should('have.value', 'Test@test.com');
+                        cy.log('✅ Email auto-populated: Test@test.com');
+
+
+
+
+
 
 
 
