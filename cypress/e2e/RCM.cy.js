@@ -345,29 +345,85 @@ describe('RCM - Revenue Cycle Management', () => {
                         }
                     });
 
+                        // Click Create Institutional Claim button to open the institutional claim modal
                         cy.get('.mr-2 > .p-ripple').click();
                         cy.log('✅ Create Institutional Claim button clicked');
-                        cy.wait(4000);
-                        cy.get('.justify-content-center > .mr-6').should('be.visible').should('have.text' , 'Institutional Claim');
-                        cy.log('✅ Institutional Claim modal opened successfully');
-                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(1) > .custom-form-label').should('be.visible').should('have.text', 'Claim No');
-                        cy.get('.p-fluid > :nth-child(1) > #float-input').should('be.visible').should('have.value','New');
-                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(2) > .custom-form-label').should('be.visible').should('have.text', 'Reference No');
-                        cy.get('.p-fluid > :nth-child(2) > #float-input').type('1234567890');
-                        cy.log('✅ Reference No entered successfully');
-                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(3) > .custom-form-label').should('be.visible').should('have.text', 'Type of Bill');
-                        cy.get('.p-input-icon-right > #float-input').should('be.visible').should('have.value', '131');
-                        cy.get('.p-input-icon-right > .pi').click();
-                        cy.get('.p-overlaypanel-content > :nth-child(1) > :nth-child(1) > .custom-form-label').should('be.visible').should('have.text', 'Type of Facility');
-                        
-                        cy.get('.mr-0 > .custom-form-label').should('be.visible').should('have.text', 'Type of Care');
-                        
-                        cy.get('.p-overlaypanel-content > :nth-child(2) > .custom-field > .custom-form-label').should('be.visible').should('have.text', 'Frequency');
-                        
-                        cy.get('.p-overlaypanel-content > [style="display: flex; justify-content: right;"] > .button-margin > .p-ripple > .p-button-label').click();
-                        cy.get('[style="width: 11%;"] > .custom-form-label').should('be.visible').should('have.text', 'MRN');
-                        cy.get('[style="width: 11%;"] > #float-input').should('be.visible').should('have.value', '312160');
 
+                        // Wait for modal loading and UI stabilization
+                        cy.wait(4000); // Consider reducing this wait time or using explicit waits for better performance
+
+                        // Verify Institutional Claim modal has opened successfully
+                        cy.get('.justify-content-center > .mr-6')
+                            .should('have.text', 'Institutional Claim');
+                        cy.log('✅ Institutional Claim modal opened successfully');
+
+                        // =======================================================================
+                        // CLAIM INFORMATION SECTION - BASIC DETAILS
+                        // =======================================================================
+
+                        // Verify and validate Claim No field (auto-generated field)
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(1) > .custom-form-label')
+                            .should('have.text', 'Claim No');
+
+                        // Verify Claim No field has default value "New" (auto-populated)
+                        cy.get('.p-fluid > :nth-child(1) > #float-input')
+                            .should('have.value', 'New');
+
+                        // Verify and fill Reference No field (manual entry required)
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(2) > .custom-form-label')
+                            .should('have.text', 'Reference No');
+
+                        // Enter Reference Number for claim tracking
+                        cy.get('.p-fluid > :nth-child(2) > #float-input')
+                            .type('1234567890'); // Consider using dynamic test data instead of hardcoded values
+                        cy.log('✅ Reference No entered successfully');
+
+                        // =======================================================================
+                        // TYPE OF BILL SECTION - BILLING CLASSIFICATION
+                        // =======================================================================
+
+                        // Verify Type of Bill field label
+                        cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(3) > .custom-form-label')
+                            .should('have.text', 'Type of Bill');
+
+                        // Verify Type of Bill field has pre-populated value "131" (institutional billing code)
+                        cy.get('.p-input-icon-right > #float-input')
+                            .should('have.value', '131'); // 131 = Hospital Inpatient (including Medicare Part A)
+
+                        // Click on Type of Bill dropdown/overlay icon to open billing details panel
+                        cy.get('.p-input-icon-right > .pi').click();
+
+                        // =======================================================================
+                        // TYPE OF BILL OVERLAY PANEL - DETAILED BILLING INFORMATION
+                        // =======================================================================
+
+                        // Verify Type of Facility label in the overlay panel
+                        cy.get('.p-overlaypanel-content > :nth-child(1) > :nth-child(1) > .custom-form-label')
+                            .should('have.text', 'Type of Facility');
+
+                        // Verify Type of Care label in the overlay panel
+                        cy.get('.mr-0 > .custom-form-label')
+                            .should('have.text', 'Type of Care');
+
+                        // Verify Frequency label in the overlay panel
+                        cy.get('.p-overlaypanel-content > :nth-child(2) > .custom-field > .custom-form-label')
+                            .should('have.text', 'Frequency');
+
+                        // Close the Type of Bill overlay panel by clicking OK/Apply button
+                        cy.get('.p-overlaypanel-content > [style="display: flex; justify-content: right;"] > .button-margin > .p-ripple > .p-button-label')
+                            .click();
+
+                        // =======================================================================
+                        // PATIENT IDENTIFICATION SECTION - MRN VERIFICATION
+                        // =======================================================================
+
+                        // Verify MRN (Medical Record Number) field label
+                        cy.get('[style="width: 11%;"] > .custom-form-label')
+                            .should('have.text', 'MRN');
+
+                        // Verify MRN field has auto-populated value "312160" (from patient selection)
+                        cy.get('[style="width: 11%;"] > #float-input')
+                            .should('have.value', '312160'); // This value should match the selected patient's MRN
 
 
 
