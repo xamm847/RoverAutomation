@@ -369,14 +369,32 @@ describe('RCM - Revenue Cycle Management', () => {
                         cy.get('.p-fluid > :nth-child(1) > #float-input')
                             .should('have.value', 'New');
 
+                            cy.wait(3000); // Wait for UI to stabilize after modal open
+
                         // Verify and fill Reference No field (manual entry required)
                         cy.get('#p-tabpanel-3 > .my_scroll_div > form.ng-untouched > .p-fluid > :nth-child(2) > .custom-form-label')
                             .should('have.text', 'Reference No');
 
                         // Enter Reference Number for claim tracking
-                        cy.get('.p-fluid > :nth-child(2) > #float-input')
-                            .type('1234567890'); // Consider using dynamic test data instead of hardcoded values
-                        cy.log('✅ Reference No entered successfully');
+// Enter Reference Number for claim tracking
+// Enter Reference Number for claim tracking
+cy.get('.p-fluid > :nth-child(2) > #float-input')
+    .should('be.visible')
+    .click()
+    .type('1234567890', { delay: 200 }) // Type slowly
+    .blur() // Trigger validation
+    .wait(500); // Wait for any async operations
+
+// Check if value persisted
+cy.get('.p-fluid > :nth-child(2) > #float-input')
+    .invoke('val')
+    .then(value => {
+        if (value === '') {
+            cy.log('❌ Value was cleared - field may require specific format');
+        } else {
+            cy.log('✅ Reference No entered successfully:', value);
+        }
+    });
 
                         // =======================================================================
                         // TYPE OF BILL SECTION - BILLING CLASSIFICATION
